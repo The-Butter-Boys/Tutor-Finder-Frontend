@@ -16,16 +16,12 @@ git clone XXXXXX
 XXXXXX is the pasted HTTPS from previous steps. <br />
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install flask.
 ```bash
-pip install flask
-```
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install flask_sqlalchemy.
-```bash
-pip install flask_sqlalchemy
+npm install
 ```
 
-## Usage
-```python
-python tutor-finder
+## Run locally
+```bash
+npm run serve
 ```
 
 ## Contributing
