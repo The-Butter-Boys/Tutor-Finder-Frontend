@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { API_URL } from '../api';
 export default {
   data() {
     return {
@@ -25,7 +26,7 @@ export default {
   methods: {
     async submitClicked() {
       const body = {username: this.username, password: this.password, email: this.email};
-      const res = await fetch('http://localhost:5000/users', {
+      const res = await fetch(`${API_URL}/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

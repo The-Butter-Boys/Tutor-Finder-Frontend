@@ -20,11 +20,11 @@
 </template>
 
 <script>
+import { API_URL } from '../api';
 export default {
   async created() {
-    const res = await fetch('http://localhost:5000/users');
-    const data = await res.json();
-    this.users = data;
+    const res = await fetch(`${API_URL}/users`);
+    this.users = await res.json();
   },
   data() {
     return {
