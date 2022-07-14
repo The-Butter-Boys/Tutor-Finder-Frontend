@@ -1,5 +1,5 @@
 <template>
-    <div class="add-user-view">
+    <div class="register-user-view">
         <label for="username">Username
             <input type="text" v-model="username">
         </label>
@@ -9,7 +9,7 @@
         <label for="email">Email
           <input type="text" v-model="email">
         </label>
-        <button type="submit" @click="submitClicked">Add User</button>
+        <button type="submit" @click="submitClicked">Register</button>
     </div>
 </template>
 
@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style scoped>
-.add-user-view {
+.register-user-view {
   display: flex;
   flex-direction: column;
 }
