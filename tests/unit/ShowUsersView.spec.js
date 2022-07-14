@@ -1,4 +1,4 @@
-import ShowUsersView from "@/src/views/ShowUsersView.vue";
+import ShowUsersView from "@/views/ShowUsersView.vue";
 import {shallowMount} from "@vue/test-utils";
 
 describe("ShowUsersView.vue", ()=> {
