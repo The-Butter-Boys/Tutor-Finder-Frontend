@@ -1,4 +1,4 @@
-import AddCourseView from "@/src/views/AddCourseView.vue";
+import AddCourseView from "@/views/AddCourseView.vue";
 import {shallowMount} from "@vue/test-utils";
 
 describe("AddCourseView.vue", ()=> {
