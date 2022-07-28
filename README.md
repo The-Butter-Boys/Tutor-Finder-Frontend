@@ -52,3 +52,15 @@ This has added the needed functionality to add different courses to be able to f
 
 ## Focus of Release
 The focus for this release was in moving the backend, and adding the functionality to the course portion of the webapp. We are still able to improve visuals at a later stage, but this release allowed us to really show more functionality to the application that wasn't present previously. Our next focus will be to allow users to select to join courses for both tutoring and being a tutor along with ensuring tests are conducted as needed.
+
+# Release Notes 3.0
+## 07/28/2022
+## New Features
+* **User Authentication** - Users now have full authentication when logging in with knowledge that they were logged in correctly or that they entered their information incorrectly. This checks for both whether the username is in the database, and if the password given will match the password hash stored.
+* **Course Addition Authentication** - When users try to add a new course they are now no longer able to reenter a course already in the system. Instead this will check to ensure any new courses are not already in the system, and if it already is, the course will not be added.
+
+## Description
+This release has added the functionality needed for authentication. Previous iterations allowed for any user to log into any account without any verification. This is dangerous to the system as it allows anyone to access another user's account, and submit them for courses or tutoring that thhey don't want or need. Adding these verifications ensures that users are only able to access their own accounts. Passwords utilize password hashing to ensure that they are stored securely in the database as well, and not as plaintext.
+
+## Focus of Release
+The focus of this release was security and functionality when it comes to logging into user accounts, and adding courses. We wanted to ensure our system is secure and not anyone can log into every account. Additionally, storage space is limited, so adding indefinite courses that are the same as other courses isn't the best idea since that would cause many duplicates. It also becomes more work to find a tutor for a course if courses are split up. Therefore, by authenticating course additions, we have mitigated this issue. And by authenticating user logins, we have ensured that users can only access accounts they are allowed to access.
