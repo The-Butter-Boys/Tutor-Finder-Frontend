@@ -7,11 +7,13 @@
       <label for="password">Password<input v-model="enteredPassword" type="text" name="password"></label>
       <div class="login-response">{{ loginResponse }}</div>
       <button type="submit" @click="login">"Login"</button>
+      <button type="submit" @click="logout">"Logout"</button>
     </div>
   </div>  
 </template>
 
 <script>
+var loggedIn = false;
 export default {
   data() {
     return {
@@ -23,7 +25,14 @@ export default {
   methods: {
     async login() {
       this.loginResponse = '';
-      if (this.isMissingFields()) return;
+      if (this.isMissingFields()) {
+        this.loginResponse = "You're missing a field."
+        return ;
+      }
+       else if (loggedIn) {
+        this.loginResponse = "You're already logged in!"
+        return ;
+      }
       const body = {username: this.enteredUsername, password: this.enteredPassword};
       const res = await fetch('http://localhost:5000/login', {
         method: 'POST',
@@ -34,10 +43,22 @@ export default {
       });
       const isSuccess = (await res.json()).success;
       this.loginResponse = isSuccess ? 'Success!' : 'Failure';
+      if (this.loginResponse == 'Success!') {
+        loggedIn = true;
+      }
     },
     isMissingFields() {
       return this.enteredUsername.trim() === '' || this.enteredPassword.trim() === '';
       
+    },
+    async logout() {
+      if (loggedIn == true) {
+        loggedIn = false;
+        this.loginResponse = "Logged Out";
+      }
+      else {
+        this.loginResponse = "You never logged in!";
+      }
     }
   }
 };

@@ -7,6 +7,8 @@
         <div>Department: {{ course.department }}</div>
         <div>Number: {{ course.number }}</div>
         <div>Name: {{ course.name }}</div>
+        <button type="submit" @click="tutSignup">Tutor Signup</button>
+        <button type="submit" @click="viewTuts">View Available Tutors</button>
         <hr>
       </div>
     </div>

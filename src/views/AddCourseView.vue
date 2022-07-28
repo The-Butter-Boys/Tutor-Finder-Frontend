@@ -10,6 +10,7 @@
           <input type="text" v-model="name">
         </label>
         <button type="submit" @click="submitClicked">Add Course</button>
+        <div class="login-response">{{ loginResponse }}</div>
     </div>
 </template>
 
@@ -21,10 +22,12 @@ export default {
       department: '',
       number: '',
       name: '',
+      loginResponse: '',
     };
   },
   methods: {
     async submitClicked() {
+      this.loginResponse = '';
       const body = {department: this.department, number: this.number, name: this.name};
       const res = await fetch(`${API_URL}/courses`, {
         method: 'POST',
@@ -33,7 +36,8 @@ export default {
         },
         body: JSON.stringify(body)
       });
-      console.log(res);
+      const isSuccess = (await res.json()).success;
+      this.loginResponse = isSuccess ? 'Successfully added course!' : 'Course already added';
     }
   }
 };
