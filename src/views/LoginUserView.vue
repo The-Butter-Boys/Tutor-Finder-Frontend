@@ -6,8 +6,8 @@
       <label for="username">Username<input v-model="enteredUsername" type="text" name="username"></label>
       <label for="password">Password<input v-model="enteredPassword" type="text" name="password"></label>
       <div class="login-response">{{ loginResponse }}</div>
-      <button type="submit" @click="login">"Login"</button>
-      <button type="submit" @click="logout">"Logout"</button>
+      <button type="submit" @click="submitLogin">"Login"</button>
+      <button class="button2" type="submit" @click="submitLogout">"Logout"</button>
     </div>
   </div>  
 </template>
@@ -23,7 +23,7 @@ export default {
     };
   },
   methods: {
-    async login() {
+    async submitLogin() {
       this.loginResponse = '';
       if (this.isMissingFields()) {
         this.loginResponse = "You're missing a field."
@@ -51,7 +51,7 @@ export default {
       return this.enteredUsername.trim() === '' || this.enteredPassword.trim() === '';
       
     },
-    async logout() {
+    async submitLogout() {
       if (loggedIn == true) {
         loggedIn = false;
         this.loginResponse = "Logged Out";
