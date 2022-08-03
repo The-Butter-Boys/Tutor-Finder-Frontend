@@ -1,44 +1,63 @@
 <template>
     <div class="add-course-view">
-        <label for="department">Department
-            <input type="text" v-model="department">
-        </label>
-        <label for="number">Number
-          <input type="text" v-model="number">
-        </label>
-        <label for="name">Name
-          <input type="text" v-model="name">
-        </label>
-        <button type="submit" @click="submitClicked">Add Course</button>
-        <div class="login-response">{{ loginResponse }}</div>
+        <div class="form">
+					<div @keydown.enter="addCourse" class="input-container">
+						<label class="form-label">Department
+								<input placeholder="eg. CSCI" class="form-input" type="text" v-model="enteredDepartment">
+						</label>
+						<label class="form-label">Number
+							<input placeholder="eg. 4830" class="form-input" type="text" v-model="enteredNumber">
+						</label>
+						<label class="form-label">Name
+							<input placeholder="eg. Intro to SWE" class="form-input" type="text" v-model="enteredName">
+						</label>
+					</div>
+					<div class="submit-container">
+						<button v-show="!isLoading" class="form-button" @click="submitClicked">Add Course</button>
+						<LoadingSpinner :isLoading="isLoading"/>
+					</div>
+				</div>
     </div>
 </template>
 
 <script>
-import { API_URL } from '../api';
+import LoadingSpinner from '@/components/LoadingSpinner';
 export default {
+	components: {
+		LoadingSpinner,
+	},
   data() {
     return {
-      department: '',
-      number: '',
-      name: '',
-      loginResponse: '',
+			isLoading: false,
+      enteredDepartment: '',
+      enteredNumber: '',
+      enteredName: '',
     };
   },
   methods: {
+		test() {
+			console.log('test');
+		},
     async submitClicked() {
-      this.loginResponse = '';
-      const body = {department: this.department, number: this.number, name: this.name};
-      const res = await fetch(`${API_URL}/courses`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-      });
-      const isSuccess = (await res.json()).success;
-      this.loginResponse = isSuccess ? 'Successfully added course!' : 'Course already added';
-    }
+      const payload = {department: this.enteredDepartment, number: this.enteredNumber, name: this.enteredName};
+			this.isLoading = true;
+			const response = await this.$store.dispatch('addCourse', payload);
+			this.isLoading = false;
+			if (response.status === 200) {
+				this.clearInputs();
+				alert('Course added!'); // TODO: don't use default alert
+				return;
+			}
+			else {
+				console.log(response);
+				alert('Something went wrong');
+			}
+    },
+		clearInputs() {
+			this.enteredDepartment = '';
+			this.enteredNumber = '';
+			this.enteredName = '';
+		},
   }
 };
 </script>
@@ -47,5 +66,8 @@ export default {
 .add-course-view {
   display: flex;
   flex-direction: column;
+}
+.add-button {
+	border: none;
 }
 </style>

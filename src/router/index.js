@@ -3,9 +3,11 @@ import VueRouter from 'vue-router';
 import HomeView from '@/views/HomeView.vue';
 import ShowUsersView from '@/views/ShowUsersView.vue';
 import ShowCoursesView from '@/views/ShowCoursesView.vue';
+import ShowUserCoursesView from '@/views/ShowUserCoursesView.vue';
 import RegisterUserView from '@/views/RegisterUserView.vue';
 import LoginUserView from '@/views/LoginUserView.vue';
 import AddCourseView from '@/views/AddCourseView.vue';
+import ProfileView from '@/views/ProfileView.vue';
 
 Vue.use(VueRouter)
 
@@ -15,15 +17,25 @@ const routes = [
     name: 'home',
     component: HomeView
   },
+	{
+		path: '/profile',
+		name: 'profile',
+		component: ProfileView
+	},
   {
     path: '/showUsers',
     name: 'showUsers',
     component: ShowUsersView,
   },
   {
-    path: '/showCourses',
+    path: '/courses',
     name: 'showCourses',
     component: ShowCoursesView,
+  },
+  {
+    path: '/myCourses',
+    name: 'showUserCourses',
+    component: ShowUserCoursesView,
   },
   {
     path: '/register',
