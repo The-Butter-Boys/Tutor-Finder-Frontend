@@ -13,7 +13,7 @@
 						</label>
 					</div>
 					<div class="submit-container">
-						<button v-show="!isLoading" class="form-button" @click="submitClicked">Add Course</button>
+						<button v-show="!isLoading" class="form-button" @click="addCourse">Add Course</button>
 						<LoadingSpinner :isLoading="isLoading"/>
 					</div>
 				</div>
@@ -38,14 +38,26 @@ export default {
 		test() {
 			console.log('test');
 		},
-    async submitClicked() {
+    async addCourse() {
+			if (this.isMissingFields()) {
+				this.$fire({
+					type: 'error',
+					title: 'Fields missing',
+					text: 'Please fill in all of the fields'
+				});
+				return;
+			}
       const payload = {department: this.enteredDepartment, number: this.enteredNumber, name: this.enteredName};
 			this.isLoading = true;
 			const response = await this.$store.dispatch('addCourse', payload);
 			this.isLoading = false;
 			if (response.status === 200) {
 				this.clearInputs();
-				alert('Course added!'); // TODO: don't use default alert
+				this.$fire({
+					type: 'success',
+					title: 'Success',
+					text: 'Your course was successfully added!'
+				});
 				return;
 			}
 			else {
@@ -53,6 +65,9 @@ export default {
 				alert('Something went wrong');
 			}
     },
+		isMissingFields() {
+			return this.enteredDepartment.trim() === '' || this.enteredNumber.trim() === '' || this.enteredName.trim() === '';
+		},
 		clearInputs() {
 			this.enteredDepartment = '';
 			this.enteredNumber = '';

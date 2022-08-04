@@ -24,13 +24,14 @@ const authenticated = {
 			/*
 			Expects payload: {authToken, user}
 			*/
+			console.log('login');
 			state.currentUser = payload.user;
 			state.authToken = payload.authToken;
 			localStorage.setItem('auth-token', payload.authToken);
 		},
 		setAuthToken(state, authToken) {
 			state.authToken = authToken;
-			localStorage.setItem('auth-token', authToken);
+			if (authToken !== null) localStorage.setItem('auth-token', authToken);
 		},
 		setCurrentUser(state, user) {
 			state.currentUser = user;

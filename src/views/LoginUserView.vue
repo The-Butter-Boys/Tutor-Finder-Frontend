@@ -11,7 +11,7 @@
 				</label>
 			</div>
 			<div class="submit-container">
-				<button v-show="!isLoading" class="login-button">Log In</button>
+				<button v-show="!isLoading" class="login-button" @click="submitLogin">Log In</button>
 				<LoadingSpinner :isLoading="isLoading"/>
 			</div>
     </div>
@@ -35,19 +35,13 @@ export default {
     };
   },
   methods: {
-		async testClicked() {
-			const response = await this.$store.dispatch('test');
-			console.log(response);
-			if (response.status === 200) {
-				alert('Success!');
-			}
-			else {
-				alert(response.status);
-			}
-		},
     async submitLogin() {
       if (this.isMissingFields()) {
-				alert('Fields missing');
+				this.$fire({
+					type: 'error',
+					title: 'Fields missing',
+					text: 'Please fill in all of the fields'
+				});
 				return;
       }
 			const payload = {username: this.enteredUsername, password: this.enteredPassword};
@@ -61,7 +55,11 @@ export default {
 				return;
 			}
 			else {
-				alert('Invalid login');
+				this.$fire({
+					type: 'error',
+					title: 'Invalid login',
+					text: 'The username or password you entered is incorrect'
+				});
 			}
     },
     isMissingFields() {

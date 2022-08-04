@@ -59,6 +59,10 @@ body {
 	margin: 10px 0;
 	cursor: pointer;
 }
+.form-button:hover {
+	background-color: var(--color-secondary-darker);
+	transition: 0.2s;
+}
 .input-container {
 	display: flex;
 	flex-direction: column;

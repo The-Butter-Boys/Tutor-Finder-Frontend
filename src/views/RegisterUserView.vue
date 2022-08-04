@@ -39,7 +39,11 @@ export default {
   methods: {
 		async submitRegister() {
 			if (this.isMissingFields()) {
-				alert('Fields missing');
+				this.$fire({
+					type: 'error',
+					title: 'Fields missing',
+					text: 'Please fill in all of the fields'
+				});
 				return;
 			}
 			const payload = {username: this.enteredUsername, password: this.enteredPassword, email: this.enteredEmail};
@@ -53,7 +57,11 @@ export default {
 			}
 			else {
 				console.log(response);
-				alert('Something went wrong');
+				this.$fire({
+					type: 'error',
+					title: 'Error',
+					text: 'Something went wrong'
+				});
 			}
 		},
 		isMissingFields() {

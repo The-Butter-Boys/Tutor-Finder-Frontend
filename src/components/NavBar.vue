@@ -4,8 +4,8 @@
 			<div class="left">
 				<router-link to="/" class="nav-item">Home</router-link>
 				<router-link to="/courses" class="nav-item">Courses</router-link>
-				<router-link to="/addCourse" class="nav-item">Add Course</router-link>
 				<router-link to="/myCourses" class="nav-item">My Courses</router-link>
+				<router-link to="/addCourse" class="nav-item">Add Course</router-link>
 				<router-link to="/profile" class="nav-item">Profile</router-link>
 				<div class="nav-item" @click="logout">Logout</div>
 			</div>
