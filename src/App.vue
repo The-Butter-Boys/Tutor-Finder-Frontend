@@ -1,19 +1,28 @@
 <template>
-  <div id="app">
-    <NavBar />
-    <router-view/>
-  </div>
+	<div id="app">
+		<NavBar />
+		<div class="body">
+			<router-view/>
+		</div>
+	</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import NavBar from '@/components/NavBar';
 export default {
 	components: {
 			NavBar,
 	},
 	async created() {
-
+		if (this.loggedIn) {
+			await this.$store.dispatch('loadCurrentUser');
+			await this.$store.dispatch('loadUserCourses');
+		}
 	},
+	computed: {
+		...mapGetters(['loggedIn', 'currentUser']),
+	}
 };
 </script>
 
@@ -22,13 +31,19 @@ export default {
 :root {
 	--color-primary: #24252a;
 	--color-primary-lighter: hsl(230, 8%, 25%);
-	--color-secondary: #00a7cc;
+	--color-primary-lightest: hsl(230, 8%, 35%);
+	--color-secondary: hsl(191, 100%, 40%);
 	--color-secondary-darker: hsl(191, 100%, 35%);
+	--color-secondary-lighter: hsl(191, 100%, 45%);
 }
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed:ital,wght@0,400;1,300;1,400&display=swap');
 body {
-	/* background-color: hsl(230, 8%, 95%); */
 	background-color: var(--color-primary-lighter);
 	color: white;
+	font-family: Roboto;
+}
+.body {
+	padding: 0 50px;
 }
 .form-input {
 	border-radius: 10px;

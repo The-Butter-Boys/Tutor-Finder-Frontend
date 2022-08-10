@@ -2,7 +2,7 @@
   <div class="navbar">
 		<div class="container" v-if="loggedIn">
 			<div class="left">
-				<router-link to="/" class="nav-item">Home</router-link>
+				<!-- <router-link to="/" class="nav-item">Home</router-link> -->
 				<router-link to="/courses" class="nav-item">Courses</router-link>
 				<router-link to="/myCourses" class="nav-item">My Courses</router-link>
 				<router-link to="/addCourse" class="nav-item">Add Course</router-link>
@@ -30,16 +30,6 @@
 import { mapGetters } from 'vuex';
 import router from '@/router';
 export default {
-	data() {
-		return {
-
-		};
-	},
-	async created() {
-		if (this.loggedIn) {
-			await this.$store.dispatch('loadCurrentUser');
-		}
-	},
 	computed: {
 		...mapGetters(['loggedIn', 'currentUser']),
 	},
@@ -53,10 +43,6 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed:ital,wght@0,400;1,300;1,400&display=swap');
-body {
-    font-family: Roboto;
-}
 .navbar {
 	display: flex;
 	background-color: #24252a;

@@ -1,7 +1,8 @@
 <template>
   <div class="home">
+		<div class="logged-in"></div>
+		<div class="guest"></div>
     <h1>Home</h1>
-		<button @click="test" class="form-button">Test Alert</button>
   </div>
 </template>
 

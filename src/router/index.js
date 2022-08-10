@@ -8,6 +8,7 @@ import RegisterUserView from '@/views/RegisterUserView.vue';
 import LoginUserView from '@/views/LoginUserView.vue';
 import AddCourseView from '@/views/AddCourseView.vue';
 import ProfileView from '@/views/ProfileView.vue';
+import ShowCourseView from '@/views/ShowCourseView';
 
 Vue.use(VueRouter)
 
@@ -51,7 +52,13 @@ const routes = [
     path: '/addCourse',
     name: 'addCourse',
     component: AddCourseView,
-  }
+  },
+	{
+		path: '/showCourse',
+		name: 'showCourse',
+		component: ShowCourseView,
+		props: true
+	}
 ]
 
 const router = new VueRouter({

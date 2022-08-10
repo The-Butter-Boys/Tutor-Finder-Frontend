@@ -31,7 +31,22 @@ const authenticated = {
 					}
 				});
 				// TODO: commit
-				return response
+				return response;
+			} catch(error) {
+				return error.response;
+			}
+		},
+		async getCourseUsers({ getters }, payload) {
+			/*
+			Expects payload: {courseID}
+			*/
+			try {
+				const response = await Axios.get(`${API_URL}/courses/${payload.courseID}/users`, {
+					headers: {
+						Authorization: `Bearer ${getters.authToken}`
+					}
+				});
+				return response;
 			} catch(error) {
 				return error.response;
 			}

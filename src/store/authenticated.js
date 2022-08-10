@@ -29,6 +29,11 @@ const authenticated = {
 			state.authToken = payload.authToken;
 			localStorage.setItem('auth-token', payload.authToken);
 		},
+		logout(state) {
+			localStorage.removeItem('auth-token');
+			state.authToken = null;
+			state.currentUser = null;
+		},
 		setAuthToken(state, authToken) {
 			state.authToken = authToken;
 			if (authToken !== null) localStorage.setItem('auth-token', authToken);
@@ -71,9 +76,8 @@ const authenticated = {
 			}
 		},
 		logout({ commit }) {
-			localStorage.removeItem('auth-token');
-			commit('setAuthToken', null);
-			commit('setCurrentUser', null);
+			commit('logout');
+			commit('setCurrentUserCourses', null);
 		},
 		async loadCurrentUser({ getters, commit }) {
 			try {
@@ -82,9 +86,14 @@ const authenticated = {
 						Authorization: `Bearer ${getters.authToken}`
 					}
 				});
+				console.log('response.data.user: ', response.data.user);
 				commit('setCurrentUser', response.data.user);
 				return response;
 			} catch(error) {
+				// If there's an error, it's probably because the token expired so 
+				// logout the user, which involves removing the auth token from storage,
+				// and setting auth token and current user both to null.
+				commit('logout');
 				return error.response;
 			}
 		},
