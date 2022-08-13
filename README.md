@@ -64,3 +64,15 @@ This release has added the functionality needed for authentication. Previous ite
 
 ## Focus of Release
 The focus of this release was security and functionality when it comes to logging into user accounts, and adding courses. We wanted to ensure our system is secure and not anyone can log into every account. Additionally, storage space is limited, so adding indefinite courses that are the same as other courses isn't the best idea since that would cause many duplicates. It also becomes more work to find a tutor for a course if courses are split up. Therefore, by authenticating course additions, we have mitigated this issue. And by authenticating user logins, we have ensured that users can only access accounts they are allowed to access.
+
+# Release Notes 4.0
+## 08/12/2022
+## New Features
+* **Course Signup** - Users can now sign up for specific courses, and will be able to view those courses they are signed up for.
+* **Course Viewer Page** - Users can view all the other users who have signed up for the course they are signed up for.
+
+## Description
+This release we shifted the way the webapp looks to something that is much better on the eyes. Additionally, we added the joining functionality for classes, added a page where users can view classes they are signed up for and added their ability to view specific classes they are signed up for to view other users who are in the same class. This gives the profile information of the users in the same class so one another can contact each other for tutoring services.
+
+## Focus of Release
+This release focused on getting all final functionality with the courses added in, and ensuring that users find an appealing product to use. Though there are things we still want to do such as add in more tutoring functions, and continue working on the appeal of the webapp, the functionality we intended originally has been implemented and if given further time we would add these other portions in.
